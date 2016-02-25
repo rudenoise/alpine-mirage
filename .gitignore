@@ -33,3 +33,4 @@ ehthumbs.db
 # vagrant and packer
 .vagrant
 *.box
+packer_cache
