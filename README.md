@@ -75,6 +75,20 @@ ssh root@{{your host only network ip}}.5
 ```
 
 ### SSH in and build mirage skeleton, static
+
+Edit /etc/apk/repositories and uncomment "_edge_" and "testing" repos.
+
+```sh
+apk upgrade --update-cache --available
+apk add opam ocaml rsync make m4 musl-dev ncurses-libs build-base gmp-dev perl ncurses-dev
+opam init
+eval `opam config env`
+opam upgrade
+opam install depext
+opam install mirage -v
+
+```
+
 ```sh
 # hello mirage world
 ```
