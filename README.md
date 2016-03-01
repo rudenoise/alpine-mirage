@@ -89,20 +89,13 @@ opam install mirage -v
 
 ```
 
-```sh
-# hello mirage world
-```
+## To Do
 
-### Steps
-
-1. Install Alpine Linux, Xen ISO
-   ```sh
-   setup-xen-dom0
-   setup-alpine
-   ```
-2. Configure Bridge
-3. Install and configure dnsmasq
-4. Make it possible to ssh into dom0
+1. Work out mirage installation dependency issues
+2. Add host-only network to VM via VBoxManage
+3. Remove VM and HON script
+4. Make scripts parameterised and add VMs to host's hosts
+5. Create mirage setup script
 
 ## Resources
 
