@@ -60,8 +60,8 @@ apk upgrade --update-cache --available
 git clone https://github.com/rudenoise/alpine-mirage.git
 cd alpine-mirage
 ./setupMirageUser.sh
-./alpine
 # visudo and uncomment %wheel All...
+./alpine
 exit
 ```
 
