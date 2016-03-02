@@ -17,6 +17,12 @@ VBoxManage hostonlyif create
 
 Make a note of the name "vboxnet{{n}}".
 
+Modify _setupBox.sh_ to point to your Alpine Xen image.
+
+```sh
+./setupBox.sh
+```
+
 Open Virtual Box app > virtual-box menu > preferences > network >
 host only network
 
