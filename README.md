@@ -25,19 +25,6 @@ Modify _setupBox.sh_ to point to your Alpine Xen image.
 
 In VM, login at root (no password).
 ```sh
-poweroff
-```
-
-Open Virtual Box app > virtual-box menu > preferences > network >
-host only network
-
-Select the network created in the previous step and edit. Copy the IP
-address. Cancel and close.
-
-Open settings on "alpine-mirage" VM > network > adaptor 2 > Enable network adaptor > host only adaptor > vboxnet{{n}}
-
-### Setup VM internals
-```sh
 setup-xen-dom0
 setup-alpine
 # follow defaults and add password
@@ -48,6 +35,14 @@ setup-alpine
 xl list
 poweroff
 ```
+
+Open Virtual Box app > virtual-box menu > preferences > network >
+host only network
+
+Select the network created in the previous step and edit. Copy the IP
+address. Cancel and close.
+
+Open settings on "alpine-mirage" VM > network > adaptor 2 > Enable network adaptor > host only adaptor > vboxnet{{n}}
 
 Then in VirtualBox app, VM settings > system > boot order > disable all but "Hard Disk".
 
