@@ -38,7 +38,15 @@ git clone https://github.com/rudenoise/alpine-mirage.git
 poweroff
 ```
 
-Then in VirtualBox app, VM settings > system > boot order > disable all but HArd Disk
+Then in VirtualBox app, VM settings > system > boot order > disable all but HArd Disk.
+
+Start VM again and login.
+
+```sh
+cd alpine-mirage
+./alpine.sh
+
+```
 
 ### SSH in and build mirage skeleton, static
 
