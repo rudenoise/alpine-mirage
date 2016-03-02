@@ -13,20 +13,47 @@ A MirageOS development environment using VBox, Alpine Linux and Xen
 ```sh
 # create host only network
 VBoxManage hostonlyif create
-# build vm from ISO
-# attach HON to VM
-# change boot order
-# launch
 ```
+
+Make a note of the name "vboxnet{{n}}".
+
+Open Virtual Box app > virtual-box menu > preferences > network >
+host only network
+
+Select the network created in the previous step and edit. Copy the IP
+address. Cancel and close.
+
+Open settings on "alpine-mirage" VM > network > adaptor 2 > Enable network adaptor > host only adaptor > vboxnet{{n}}
 
 ### Setup VM internals
 ```sh
 setup-xen-dom0
 setup-alpine
 # ensure ssh is ready http://wiki.alpinelinux.org/wiki/Setting_up_a_ssh-server
-apk add bridge-utils git vim dnsmasq
+apk add vim git
 # test xen
 xl list
+git clone https://github.com/rudenoise/alpine-mirage.git
+# shut down
+poweroff
+```
+
+Then in VirtualBox app, VM settings > system > boot order > disable all but HArd Disk
+
+### SSH in and build mirage skeleton, static
+
+Edit /etc/apk/repositories and uncomment "_edge_" and "testing" repos.
+
+```sh
+apk upgrade --update-cache --available
+apk add bridge-utils dnsmasq
+apk add opam ocaml rsync make m4 musl-dev ncurses-libs build-base gmp-dev perl ncurses-dev
+opam init
+eval `opam config env`
+opam upgrade
+opam install depext
+opam install mirage -v
+
 ```
 
 Setup network interfaces
@@ -74,19 +101,16 @@ reboot
 ssh root@{{your host only network ip}}.5
 ```
 
-### SSH in and build mirage skeleton, static
 
-Edit /etc/apk/repositories and uncomment "_edge_" and "testing" repos.
+
+## Delete
+
+In Virtual Box app, make sure VM is stopped and "remove".
+
+Then remove host only network.
 
 ```sh
-apk upgrade --update-cache --available
-apk add opam ocaml rsync make m4 musl-dev ncurses-libs build-base gmp-dev perl ncurses-dev
-opam init
-eval `opam config env`
-opam upgrade
-opam install depext
-opam install mirage -v
-
+VBoxManage hostonlyif remove "vboxnet{{n}}" 
 ```
 
 ## To Do
