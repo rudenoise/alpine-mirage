@@ -1,0 +1,21 @@
+auto lo
+iface lo inet loopback
+
+auto eth0
+iface eth0 inet dhcp
+
+auto eth1
+iface eth1 inet manual
+    pre-up ifconfig $IFACE up
+    post-down ifconfig $IFACE down
+
+auto br0
+iface br0 inet static
+    bridge_ports eth1
+    address {{your host only network ip}}.5
+    broadcast {{your host only network ip}}.255
+    netmask 255.255.255.0
+    # disable ageing (turn bridge into switch)
+    up /sbin/brctl setageing br0 0
+    # disable stp
+    up /sbin/brctl stp br0 off

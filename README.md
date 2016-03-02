@@ -69,45 +69,14 @@ Test login as _mirage_ user, exit and back in as root.
 
 Setup network interfaces.
 
-```
-# /etc/network/interfaces
-auto lo
-iface lo inet loopback
-
-auto eth0
-iface eth0 inet dhcp
-
-auto eth1
-iface eth1 inet manual
-    pre-up ifconfig $IFACE up
-    post-down ifconfig $IFACE down
-
-auto br0
-iface br0 inet static
-    bridge_ports eth1
-    address {{your host only network ip}}.5
-    broadcast {{your host only network ip}}.255
-    netmask 255.255.255.0
-    # disable ageing (turn bridge into switch)
-    up /sbin/brctl setageing br0 0
-    # disable stp
-    up /sbin/brctl stp br0 off
-```
-
-setup dnsmasq
-
-```
-# /etc/dnsmasq.conf
-interface=br0
-dhcp-range={{your host only network ip}}.150,{{your host only network ip}}.200,1h
-```
-
-
+Edit, replacing {{your host only network ip}}. Then put them in place.
 ```sh
-reboot
+cp interfaces /etc/network/interfaces
+cp dnsmasq.conf /etc/dnsmasq.conf
+poweroff
 ```
 
-Now, SSH in and set-up mirage env
+Start the VM in headless mode and SSH in and set-up mirage env
 
 ```sh
 ssh mirage@{{your host only network ip}}.5
