@@ -32,44 +32,6 @@ setup-alpine
 apk add vim git sudo
 # test xen
 xl list
-# shut down
-poweroff
-```
-
-Then in VirtualBox app, VM settings > system > boot order > disable all but HArd Disk.
-
-Start VM again and login.
-
-```sh
-git clone https://github.com/rudenoise/alpine-mirage.git
-cd alpine-mirage
-./setupMirageUser.sh
-# vsudo and uncomment %wheel All...
-exit
-```
-
-Login as mirage
-```sh
-git clone https://github.com/rudenoise/alpine-mirage.git
-cd alpine-mirage
-sudo ./alpine.sh
-./opam.sh
-```
-
-### SSH in and build mirage skeleton, static
-
-Edit /etc/apk/repositories and uncomment "_edge_" and "testing" repos.
-
-```sh
-apk upgrade --update-cache --available
-apk add bridge-utils dnsmasq
-apk add opam ocaml rsync make m4 musl-dev ncurses-libs build-base gmp-dev perl ncurses-dev
-opam init
-eval `opam config env`
-opam upgrade
-opam install depext
-opam install mirage -v
-
 ```
 
 Setup network interfaces
@@ -99,25 +61,46 @@ iface br0 inet static
 ```
 
 setup dnsmasq
+
 ```
 # /etc/dnsmasq.conf
 interface=br0
 dhcp-range={{your host only network ip}}.150,{{your host only network ip}}.200,1h
 ```
 
-setup ssh
-```
-# /etc/ssh/sshd_config
-PermitRootLogin yes
-```
+Edit /etc/apk/repositories and uncomment "_edge_" and "testing" repos.
 
-reboot
-### SSH in and set-up mirage env
 ```sh
-ssh root@{{your host only network ip}}.5
+apk upgrade --update-cache --available
+# shut down
+poweroff
 ```
 
+Then in VirtualBox app, VM settings > system > boot order > disable all but "Hard Disk".
 
+Start VM again and login as root.
+
+```sh
+git clone https://github.com/rudenoise/alpine-mirage.git
+cd alpine-mirage
+./setupMirageUser.sh
+# vsudo and uncomment %wheel All...
+exit
+```
+
+Now, SSH in and set-up mirage env
+
+```sh
+ssh mirage@{{your host only network ip}}.5
+```
+
+```sh
+git clone https://github.com/rudenoise/alpine-mirage.git
+cd alpine-mirage
+sudo ./alpine.sh
+./opam.sh
+reboot
+```
 
 ## Delete
 
