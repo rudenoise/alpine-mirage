@@ -55,6 +55,7 @@ apk add vim git sudo bridge-utils dnsmasq
 Edit /etc/apk/repositories and uncomment "_edge_" and "testing" repos.
 
 ```sh
+apk update
 apk upgrade --update-cache --available
 git clone https://github.com/rudenoise/alpine-mirage.git
 cd alpine-mirage
