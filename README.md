@@ -15,17 +15,17 @@ A MirageOS development environment using VBox, Alpine Linux and Xen
 VBoxManage hostonlyif create
 ```
 
-In VM, login at root (no password).
-```sh
-poweroff
-```
-
 Make a note of the name "vboxnet{{n}}".
 
 Modify _setupBox.sh_ to point to your Alpine Xen image.
 
 ```sh
 ./setupBox.sh
+```
+
+In VM, login at root (no password).
+```sh
+poweroff
 ```
 
 Open Virtual Box app > virtual-box menu > preferences > network >
@@ -54,7 +54,7 @@ Then in VirtualBox app, VM settings > system > boot order > disable all but "Har
 Start VM again and login as root.
 
 ```sh
-apk add vim git sudo dnsmasq
+apk add vim git sudo bridge-utils dnsmasq
 ```
 
 Edit /etc/apk/repositories and uncomment "_edge_" and "testing" repos.
@@ -64,6 +64,7 @@ apk upgrade --update-cache --available
 git clone https://github.com/rudenoise/alpine-mirage.git
 cd alpine-mirage
 ./setupMirageUser.sh
+./alpine
 # visudo and uncomment %wheel All...
 exit
 ```
@@ -106,6 +107,10 @@ dhcp-range={{your host only network ip}}.150,{{your host only network ip}}.200,1
 ```
 
 
+```sh
+reboot
+```
+
 Now, SSH in and set-up mirage env
 
 ```sh
@@ -115,7 +120,6 @@ ssh mirage@{{your host only network ip}}.5
 ```sh
 git clone https://github.com/rudenoise/alpine-mirage.git
 cd alpine-mirage
-sudo ./alpine.sh
 ./opam.sh
 reboot
 ```
