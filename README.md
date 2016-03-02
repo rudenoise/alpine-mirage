@@ -44,7 +44,6 @@ setup-alpine
 # use _sda_
 # in _sys_
 # say yes, it will write OS to HD
-apk add vim git sudo
 # test xen
 xl list
 poweroff
@@ -54,7 +53,25 @@ Then in VirtualBox app, VM settings > system > boot order > disable all but "Har
 
 Start VM again and login as root.
 
-Setup network interfaces
+```sh
+apk add vim git sudo dnsmasq
+```
+
+Edit /etc/apk/repositories and uncomment "_edge_" and "testing" repos.
+
+```sh
+apk upgrade --update-cache --available
+git clone https://github.com/rudenoise/alpine-mirage.git
+cd alpine-mirage
+./setupMirageUser.sh
+# visudo and uncomment %wheel All...
+exit
+```
+
+Test login as _mirage_ user, exit and back in as root.
+
+Setup network interfaces.
+
 ```
 # /etc/network/interfaces
 auto lo
@@ -88,21 +105,6 @@ interface=br0
 dhcp-range={{your host only network ip}}.150,{{your host only network ip}}.200,1h
 ```
 
-Edit /etc/apk/repositories and uncomment "_edge_" and "testing" repos.
-
-```sh
-apk upgrade --update-cache --available
-# shut down
-poweroff
-```
-
-```sh
-git clone https://github.com/rudenoise/alpine-mirage.git
-cd alpine-mirage
-./setupMirageUser.sh
-# vsudo and uncomment %wheel All...
-exit
-```
 
 Now, SSH in and set-up mirage env
 
