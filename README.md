@@ -29,11 +29,9 @@ Open settings on "alpine-mirage" VM > network > adaptor 2 > Enable network adapt
 ```sh
 setup-xen-dom0
 setup-alpine
-# ensure ssh is ready http://wiki.alpinelinux.org/wiki/Setting_up_a_ssh-server
-apk add vim git
+apk add vim git sudo
 # test xen
 xl list
-git clone https://github.com/rudenoise/alpine-mirage.git
 # shut down
 poweroff
 ```
@@ -43,9 +41,19 @@ Then in VirtualBox app, VM settings > system > boot order > disable all but HArd
 Start VM again and login.
 
 ```sh
+git clone https://github.com/rudenoise/alpine-mirage.git
 cd alpine-mirage
-./alpine.sh
+./setupMirageUser.sh
+# vsudo and uncomment %wheel All...
+exit
+```
 
+Login as mirage
+```sh
+git clone https://github.com/rudenoise/alpine-mirage.git
+cd alpine-mirage
+sudo ./alpine.sh
+./opam.sh
 ```
 
 ### SSH in and build mirage skeleton, static
