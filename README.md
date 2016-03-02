@@ -15,6 +15,11 @@ A MirageOS development environment using VBox, Alpine Linux and Xen
 VBoxManage hostonlyif create
 ```
 
+In VM, login at root (no password).
+```sh
+poweroff
+```
+
 Make a note of the name "vboxnet{{n}}".
 
 Modify _setupBox.sh_ to point to your Alpine Xen image.
@@ -35,10 +40,19 @@ Open settings on "alpine-mirage" VM > network > adaptor 2 > Enable network adapt
 ```sh
 setup-xen-dom0
 setup-alpine
+# follow defaults and add password
+# use _sda_
+# in _sys_
+# say yes, it will write OS to HD
 apk add vim git sudo
 # test xen
 xl list
+poweroff
 ```
+
+Then in VirtualBox app, VM settings > system > boot order > disable all but "Hard Disk".
+
+Start VM again and login as root.
 
 Setup network interfaces
 ```
@@ -81,10 +95,6 @@ apk upgrade --update-cache --available
 # shut down
 poweroff
 ```
-
-Then in VirtualBox app, VM settings > system > boot order > disable all but "Hard Disk".
-
-Start VM again and login as root.
 
 ```sh
 git clone https://github.com/rudenoise/alpine-mirage.git
