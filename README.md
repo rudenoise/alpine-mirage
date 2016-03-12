@@ -83,6 +83,7 @@ ssh mirage@{{your host only network ip}}.5
 ```
 
 ```sh
+sudo apk add ocaml
 git clone https://github.com/rudenoise/alpine-mirage.git
 cd alpine-mirage
 ./opam.sh
@@ -102,6 +103,7 @@ VBoxManage hostonlyif remove "vboxnet{{n}}"
 ## To Do
 
 1. Work out mirage installation dependency issues
+   (via aspcud or PackUP neither available via apk)
 2. Add host-only network to VM via VBoxManage
 3. Remove VM and HON script
 4. Make scripts parameterised and add VMs to host's hosts
