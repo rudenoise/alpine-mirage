@@ -1,6 +1,17 @@
 # alpine-mirage
 A MirageOS development environment using VBox, Alpine Linux and Xen
 
+## Current Status: Blocked
+
+While I can build some of the smaller mirage-skeleton unikernels
+the larger (and more useful ones) run into dependency management
+issues. These would likely be solved with _aspcud_ which _opam_
+uses to solve these issues. This could be brought in via
+_0install_ but these rely on compilers that are unavailable in
+Alpine, at the moment.
+
+talex5 assures me that the next release is likely to be compatible.
+
 ## Manual Setup
 
 ### Prerequisites
@@ -120,3 +131,4 @@ VBoxManage hostonlyif remove "vboxnet{{n}}"
 * [configure a network bridge](http://wiki.alpinelinux.org/wiki/Bridge)
 * [http://wiki.alpinelinux.org/wiki/Setting_up_a_ssh-server](http://wiki.alpinelinux.org/wiki/Setting_up_a_ssh-server)
 * [Creating a virtual machine using the VirtualBox CLI](http://cheznick.net/main/content/creating-a-virtual-machine-using-the-virtualbox-cli)
+* [0install](http://0install.net/)
